@@ -7,12 +7,14 @@ import AuthForm from './LoginForm';
 import AddBookModal from './AddBookForm';
 import axios from 'axios';
 import { toast } from "sonner";
+import { useNavigate } from 'react-router-dom';
 
 const Navigation = () => {
   const location = useLocation();
   const { currentUser } = useBooks();
   const [showLogin, setShowLogin] = useState(false);
   const [showAddBook, setShowAddBook] = useState(false);
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -51,6 +53,12 @@ const Navigation = () => {
 
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    toast.success("Logged out");
+    navigate('/');
   };
 
   return (
@@ -100,11 +108,24 @@ const Navigation = () => {
                 </button>
               )}
 
-              <div className={`absolute w-20 p-1 py-2 z-10 bg-amber-100 border-2 border-amber-200 text-amber-600 rounded-lg text-sm top-10 left-0 ${localStorage.getItem('role') === 'admin' && showAddBook ? '' : 'hidden'}`}>
-                <button onMouseOut={() => setShowAddBook(false)} onClick={() => setShowModal(true)}>
-                  Add Book
-                </button>
-              </div>
+                <div 
+                  onMouseOut={() => setShowAddBook(false)} 
+                  className={`absolute w-28 p-2 z-10 bg-amber-100 border-2 border-amber-200 text-amber-600 rounded-lg text-sm top-10 left-0 space-y-1 ${
+                    localStorage.getItem('userId') && showAddBook ? '' : 'hidden'
+                  }`}
+                >
+                  {localStorage.getItem('role') === 'admin' && (
+                    <button onClick={() => setShowModal(true)} className="w-full text-left px-2 py-1 hover:bg-amber-200 rounded">
+                      Add Book
+                    </button>
+                  )}
+                  <button 
+                    onClick={handleLogout} 
+                    className="w-full text-left px-2 py-1 hover:bg-amber-200 rounded"
+                  >
+                    Logout
+                  </button>
+                </div>
             </div>
           </div>
         </div>

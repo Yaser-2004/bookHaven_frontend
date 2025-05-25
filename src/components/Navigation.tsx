@@ -109,7 +109,7 @@ const Navigation = () => {
               )}
 
                 <div 
-                  onMouseOut={() => setShowAddBook(false)} 
+                  onClick={() => setShowAddBook(!showAddBook)} 
                   className={`absolute w-28 p-2 z-10 bg-amber-100 border-2 border-amber-200 text-amber-600 rounded-lg text-sm top-10 left-0 space-y-1 ${
                     localStorage.getItem('userId') && showAddBook ? '' : 'hidden'
                   }`}

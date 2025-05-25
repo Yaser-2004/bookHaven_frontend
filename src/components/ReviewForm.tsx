@@ -125,7 +125,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ bookId, onClose }) => {
             </button>
             <button
               type="submit"
-              disabled={rating === 0 || isSubmitting || localStorage.getItem('user') === null}
+              disabled={isSubmitting || localStorage.getItem('user') === null}
               className="flex-1 px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isSubmitting ? 'Submitting...' : 'Submit Review'}

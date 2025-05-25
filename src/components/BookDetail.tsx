@@ -11,7 +11,7 @@ const BookDetail = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
   
-  const book = getBookById(id!);
+  const book = getBookById(id);
 
   useEffect(() => {
     const fetchReviews = async () => {

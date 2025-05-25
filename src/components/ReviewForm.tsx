@@ -20,7 +20,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ bookId, onClose }) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     
-    if (!currentUser || rating === 0) return;
+    if (!token) return;
 
     setIsSubmitting(true);
     
